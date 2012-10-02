@@ -1,4 +1,9 @@
-Post a photo:
+
+<b>Foobar RESTful server</b>
+<br><br>
+Test below: <br><br><br>
+
+<b>Post a photo:</b>
 <form action="/photoposts/"
 enctype="multipart/form-data" method="post">
 <p>
@@ -14,3 +19,35 @@ access_token: <input type="text" name="access_token" value="a123" size="30">
 <input type="submit" value="Send">
 </div>
 </form>
+
+
+<br><br>
+
+<b>Create User:</b>
+<form action="/users/" method="post">
+<p>
+username: <input type="text" name="username" value="rajaraodv" size="30">
+</p>
+<p>
+access_token: <input type="text" name="access_token" value="a123" size="30">
+</p>
+<p>
+photo_url: <input type="text" name="photo_url" value="http://facebook.com/path/to/users/photo.jpg" size="30">
+</p>
+<p>
+account_type: <input type="text" name="account_type" value="facebook" size="30"> facebook or twitter
+</p>
+<p>
+first_name: <input type="text" name="first_name" value="raja" size="30">
+</p>
+<p>
+last_name: <input type="text" name="last_name" value="rao" size="30">
+</p>
+<div>
+<input type="submit" value="Send">
+</div>
+</form>
+
+
+
+
