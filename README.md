@@ -1,0 +1,1 @@
+Restful Node.hs server for Foobar project - More details coming soon
