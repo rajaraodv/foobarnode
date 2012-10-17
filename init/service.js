@@ -6,7 +6,6 @@ module.exports.init = function(m) {
     mongoose = m;
     User = require(__dirname + "/../lib/models/user")(m, simpleTimestamps).User;
     module.exports.validateAndLoadUser = getValidatorMiddleWare(User);
-
 };
 
 module.exports.useModel = function(modelName) {
@@ -17,8 +16,6 @@ module.exports.useModel = function(modelName) {
 module.exports.useUtil = function(utilName) {
     return require(__dirname + "/../lib/utils/" + utilName);
 };
-
-
 
 function getValidatorMiddleWare(User) {
     return require(__dirname + "/../lib/middlewares/validateAndLoadUser")(User);
