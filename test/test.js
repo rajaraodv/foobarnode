@@ -21,6 +21,7 @@ var EmbeddedUser = service.useModel('embeddedUser').EmbeddedUser;
 var PhotoPost = service.useModel('photoPost').PhotoPost;
 var Photo = service.useModel('photo').Photo;
 var Comment = service.useModel('comment').Comment;
+var Like = service.useModel('like').Like;
 
 var user1Props = {
   account_type: "facebook",
@@ -99,6 +100,10 @@ var comment2Props = {
   post_id: "tempId"
 };
 
+var like1Props = {
+  creator: eUser1,
+  post_id: "tempId"
+};
 
 var photoPost2Props = {
   creator: eUser2,
@@ -220,6 +225,100 @@ describe('Comments', function() {
       photoPost1.remove(function(err) {
         should.not.exist(err);
         comment1.remove(function(err) {
+          should.not.exist(err);
+          done();
+        });
+      });
+    });
+  });
+
+});
+
+describe('Likes', function() {
+  var like1 = null; //user1 liking pp1
+  var like2 = null; //user1 liking pp2
+  var user1 = null;
+  var photoPost1 = null;
+  var photoPost2 = null;
+
+  beforeEach(function(done) {
+    step(function removeAllUsers() {
+      User.remove({}, this);
+    }, function createUser1() {
+      User.create(user1Props, this);
+    }, function createPhotoPost1(err, u1) {
+      if(err) throw err;
+
+      user1 = u1;
+      photoPost1Props["creator"]["_id"] = user1._id;
+      PhotoPost.create(photoPost1Props, this);
+    }, function createPhotoPost2(err, pp1) {
+      if(err) throw err;
+
+      photoPost1 = pp1;
+
+      //photopost2
+      photoPost2Props["creator"]["_id"] = user1._id;
+      PhotoPost.create(photoPost2Props, this);
+    }, function createLike1(err, pp2) {
+      if(err) throw err;
+
+      photoPost2 = pp2;
+      //like1 =  user1 liking photoPost1
+      like1Props["creator"]["_id"] = user1._id;
+      like1Props["post_id"] = photoPost1._id;
+      Like.create(like1Props, this);
+    }, function createLike2(err, newLike) {
+      if(err) throw err;
+
+      like1 = newLike;
+
+      //like2 = user1 liking photoPost2
+      like1Props["creator"]["_id"] = user1._id;
+      like1Props["post_id"] = photoPost2._id;
+      Like.create(like1Props, this);
+    }, function last(err, newLike) {
+      like2 = newLike;
+      should.not.exist(err);
+      done();
+    });
+  });
+
+  it('Test setup for "Like" in BeforeEach', function(done) {
+    should.exist(user1);
+    should.exist(photoPost1);
+    should.exist(like1);
+    should.exist(like2);
+    expect(like1.creator._id).to.equal(user1._id);
+    expect(like1.post_id).to.equal(photoPost1._id);
+
+    //like2 = user1 liking pp2
+    expect(like2.creator._id).to.equal(user1._id);
+    expect(like2.post_id).to.equal(photoPost2._id);
+    done();
+  });
+
+  it('Test updating creator', function(done) {
+    var props = {
+      "first_name": "new_first_name",
+      "username": "new_username",
+      "photo_url": "newPhotoUrl"
+    };
+    var emObj = EmbeddedUser.getEmbeddableObjToUpdate(props);
+
+    Like.updateCreator(user1._id, emObj, function(err, count) {
+      expect(count).to.equal(2);
+      done();
+    });
+
+  });
+
+  afterEach(function(done) {
+    user1.remove(function(err) {
+      should.not.exist(err);
+      photoPost1.remove(function(err) {
+        should.not.exist(err);
+        like1.remove(function(err) {
           should.not.exist(err);
           done();
         });
@@ -358,6 +457,8 @@ describe('Update User: Test Updating user also user info on all photoposts & com
   var user1 = null;
   var comment1 = null;
   var comment2 = null;
+  var like1 = null;
+  var like2 = null;
 
   beforeEach(function(done) {
     step(function removeAllUsers() {
@@ -389,8 +490,21 @@ describe('Update User: Test Updating user also user info on all photoposts & com
       comment2Props["creator"]["_id"] = user1._id;
       comment2Props["post_id"] = photoPost2._id;
       Comment.create(comment2Props, this);
-    }, function last(err, c2) {
+    }, function createLike1(err, c2) {
       comment2 = c2;
+
+      like1Props["creator"]["_id"] = user1._id;
+      like1Props["post_id"] = photoPost1._id;
+      Like.create(like1Props, this);
+    }, function createLike2(err, newLike) {
+      like1 = newLike;
+
+      like1Props["creator"]["_id"] = user1._id;
+      like1Props["post_id"] = photoPost2._id;
+      Like.create(like1Props, this);
+    }, function last(err, newLike) {
+      like2 = newLike;
+
       should.not.exist(err);
       done();
     });
@@ -410,7 +524,16 @@ describe('Update User: Test Updating user also user info on all photoposts & com
 
             comment2.remove(function(err) {
               should.not.exist(err);
-              done();
+
+              like1.remove(function(err) {
+                should.not.exist(err);
+
+                like2.remove(function(err) {
+                  should.not.exist(err);
+
+                  done();
+                });
+              });
             });
           });
         });
@@ -428,7 +551,7 @@ describe('Update User: Test Updating user also user info on all photoposts & com
     done();
   });
 
-  it('Test updating user also updates all photoPosts', function(done) {
+  it('Test updating user also updates all "photoPosts"', function(done) {
     request(app).put('/users/me').set('X-foobar-username', user1.username).set('X-foobar-access-token', user1.access_token).send({
       "first_name": "bla_first_name"
     }).end(function(err, response) {
@@ -448,7 +571,7 @@ describe('Update User: Test Updating user also user info on all photoposts & com
   });
 
 
-  it('Test updating user also updates all Comments', function(done) {
+  it('Test updating user also updates all "Comments"', function(done) {
     request(app).put('/users/me').set('X-foobar-username', user1.username).set('X-foobar-access-token', user1.access_token).send({
       "first_name": "bla_first_name"
     }).end(function(err, response) {
@@ -462,6 +585,25 @@ describe('Update User: Test Updating user also user info on all photoposts & com
         var c2 = docs[1];
         expect(c1.creator.first_name).to.equal('bla_first_name');
         expect(c2.creator.first_name).to.equal('bla_first_name');
+        done();
+      });
+    });
+  });
+
+  it('Test updating user also updates all "Likes"', function(done) {
+    request(app).put('/users/me').set('X-foobar-username', user1.username).set('X-foobar-access-token', user1.access_token).send({
+      "first_name": "bla_first_name"
+    }).end(function(err, response) {
+      expect(response.statusCode).to.equal(200);
+      expect(response.body.first_name).to.equal('bla_first_name');
+      Like.find({
+        "creator._id": user1._id
+      }, function(err, docs) {
+        docs.length.should.eql(2);
+        var l1 = docs[0];
+        var l2 = docs[1];
+        expect(l1.creator.first_name).to.equal('bla_first_name');
+        expect(l2.creator.first_name).to.equal('bla_first_name');
         done();
       });
     });
