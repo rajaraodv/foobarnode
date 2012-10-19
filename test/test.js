@@ -219,6 +219,17 @@ describe('Comments', function() {
     done();
   });
 
+  it('Test POST /comments adds Comment', function(done) {
+    request(app).post('/comments').set('X-foobar-username', user1.username).set('X-foobar-access-token', user1.access_token).
+    send({
+      "post_id": photoPost1._id,
+      "text": " from rajaraodv"
+    }).end(function(err, response) {
+      expect(response.statusCode).to.equal(200);
+      done();
+    });
+  });
+
   afterEach(function(done) {
     user1.remove(function(err) {
       should.not.exist(err);
