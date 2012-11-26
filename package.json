@@ -8,9 +8,7 @@
     "imagemagick": "0.1.3",
     "mongoose": "3.x",
     "step": "0.0.5",
-    //Get Express3.x version of everyauth from express3 tag
-    "everyauth": "git://github.com/bnoguchi/everyauth.git#express3",
-    "q": ""
+    "everyauth": "git://github.com/bnoguchi/everyauth.git#express3"
   },
   "devDependencies": {
     "mocha": "*",
