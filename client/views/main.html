@@ -1,0 +1,81 @@
+<div id="content">
+    <div id="billboard">
+        <div id="billboard_left">
+            <img src="/img/billboard_chocolate_trio.png">
+        </div>
+        <div id="billboard_right">
+            <img id="billboard_header" src="/img/text_chocolate.png">
+            <span id="ampersand">
+                &amp;
+            </span>
+            <span id="billboard_subhead">
+                Placeholder copy
+            </span>
+            <br>
+            <div id="billboard_text">
+                Lorem ipsum dolor sit amet, consectetur adip isicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna.
+            </div>
+            <br>
+            <div class="learn-more">
+                <a class="btn-foobar">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <div id="home_photos">
+        <h1>
+            Most Popular Contest Photos
+        </h1>
+            <div id="photoContainer" style="position:relative;height:800px;zoom:1;">
+                <div class="photo" ng-repeat="photoPost in photoPosts">
+                        <a showonhoverparent class="likeBtn axnBtn btn" ng-click='like(photoPost)'><i class="icon-thumbs-up" ></i>Like</a>
+                        <a showonhoverparent togglecommentfield class="commentBtn axnBtn btn" ><i class="icon-comment"></i>Comment</a>
+                    <img ng-src="{{photoPost.photo.url}}" class="photoInfo" add-masonry="photoPost" />
+                    <div >
+                        <label class="caption">
+                        {{photoPost.photo_caption}}
+                        <label>
+                    </div>
+                    <div class="stats">
+                        <div>
+                            <ng-pluralize count="photoPost.likes_cnt" when="pluralizeLikes"></ng-pluralize>
+                        </div>
+                          <div >
+                            <ng-pluralize count="photoPost.comments_cnt" when="pluralizeComments"></ng-pluralize>
+                        </div>
+                    </div>
+
+                    <div class="comments">
+                        <div class="comment" ng-repeat="comment in photoPost.comments">
+                            <table width="100%" cellpadding=2px><tr><td width="24px" valign="top">
+                                <img ng-src="{{comment.creator.photo_url}}" style='width:24px;height:24px' />
+                            </td><td>
+                                <label class="commentTxt">{{comment.text}}</label>
+                            </td><tr></table>
+                        </div>
+
+                    </div>
+                     <div class="commentWrap" ng-show="cf">
+                            <textarea class="c11" placeholder="Add a comment..."></textarea>
+                                <a  class="btn btn-mini commentPostBtn" ><i class="icon-comment"></i>Comment</a>
+                    </div>
+                </div>
+
+            </div>
+
+    </div>
+    <div id="home_stream">
+        <h1>
+            Social Stream
+        </h1>
+        <div id="home_stream_inner">
+            <div id="twitter_widget_div" add-twtr-widget>
+            </div>
+        </div>
+    </div>
+    <div id="icons_sharing" ng-controller="ShareCtrl">
+        <a ng-click="gclick()"><img id="google" src="/img/icon_social_g+.png"></a>
+        <a ng-click="twtClick()" ><img id="twitter" src="/img/icon_social_twitter.png"></a>
+        <a ng-click="fbsClick()"><img src="/img/icon_social_fb.png"></a>
+    </div>
+</div>

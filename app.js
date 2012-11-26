@@ -8,5 +8,6 @@
         //only start if called directly (and not from tests)
         mongoose.connect('mongodb://127.0.0.1/sampledb');
         app.listen(3000);
+
         console.log("listening on port %d", 3000);
     }
