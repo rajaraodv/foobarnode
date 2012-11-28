@@ -1,7 +1,7 @@
 # 1 (undefined, #undefined)
 CACHE MANIFEST
 
-# Time: Mon Nov 26 2012 13:16:14 GMT-0800 (PST)
+# Time: Wed Nov 28 2012 13:35:48 GMT-0800 (PST)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/#/
@@ -29,20 +29,6 @@ CACHE:
 /img/icon_social_twitter.png
 /img/logo_foobar.png
 /img/text_chocolate.png
-http://a0.twimg.com/profile_images/1749796582/image_bigger.jpg
-http://a0.twimg.com/profile_images/1792517597/mthumb_bigger.png
-http://a0.twimg.com/profile_images/2272778869/ophw8rsgkpxzr98au97f_normal.png
-http://foobarnode.cloudfoundry.com/photos/507d256fdc13ab2c55000025
-http://foobarnode.cloudfoundry.com/photos/507fc405ec1996642d000014
-http://foobarnode.cloudfoundry.com/photos/5081169395148ef17900001c
-http://foobarnode.cloudfoundry.com/photos/508116b395148ef179000020
-http://foobarnode.cloudfoundry.com/photos/508116fe95148ef179000024
-http://foobarnode.cloudfoundry.com/photos/5081454795148ef179000029
-http://foobarnode.cloudfoundry.com/photos/5081462995148ef17900002f
-http://foobarnode.cloudfoundry.com/photos/508148e695148ef179000035
-http://foobarnode.cloudfoundry.com/photos/5082f9f895148ef17900003c
-http://foobarnode.cloudfoundry.com/photos/50900ce795148ef179000042
-http://graph.facebook.com/625081917/picture?type=large
 http://localhost:3501/img/glyphicons-halflings-white.png
 http://localhost:3501/img/glyphicons-halflings.png
 http://localhost:3501/img/icon_cart_off.png
@@ -51,20 +37,19 @@ http://localhost:3501/img/icon_heart.png
 http://localhost:3501/img/icons_mobile_off.png
 http://localhost:3501/img/icons_mobile_on.png
 http://localhost:3501/img/nav_sep.png
-http://widgets.twimg.com/i/widget-bird.png
 http://widgets.twimg.com/j/2/widget.css
 http://www.google-analytics.com/ga.js
-scripts/a2b042aa.scripts.js
+scripts/672d0b3c.scripts.js
+scripts/vendor/051af58b.bootstrap.min.js
 scripts/vendor/496d0270.googleAnalytics.js
-scripts/vendor/b291a314.angular-resource.js
+scripts/vendor/75d59a1f.angular-resource.min.js
+scripts/vendor/9cb685d9.angular.min.js
 scripts/vendor/c3fdd056.twitterWidget.min.js
-scripts/vendor/d10639ae.angular.js
 scripts/vendor/e1288116.jquery-1.8.3.min.js
-scripts/vendor/f0a761d9.bootstrap-dropdown.js
 scripts/vendor/f1739077.jquery.imagesloaded.min.js
 scripts/vendor/fc2d7669.jquery.masonry.min.js
-styles/a8a5c834.main.css
-styles/d42d9c60.foobar.css
+styles/1a4eacd2.foobar.css
+styles/a3ab6844.main.css
 styles/fbe0125f.bootstrap.css
 
 NETWORK:

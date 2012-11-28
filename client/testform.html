@@ -1,0 +1,77 @@
+<b>
+    Foobar RESTful server
+</b>
+<br>
+<br>
+<div id="twitter-login">
+    <a href="/auth/twitter" style="border: 0px">
+        <img style="border: 0px" src="https://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png">
+    </a>
+</div>
+Test below:
+<br>
+<br>
+<br>
+<b>
+    Post a photo:
+</b>
+<form action="/photoposts/" enctype="multipart/form-data" method="post">
+    <p>
+        username:
+        <input type="text" name="username" value="rajaraodv" size="30">
+    </p>
+    <p>
+        access_token:
+        <input type="text" name="access_token" value="a123" size="30">
+    </p>
+    <p>
+        product_id:
+        <input type="text" name="product_id" value="1" size="30">
+    </p>
+    <p>
+        <input type="file" name="pic" size="40">
+    </p>
+    <div>
+        <input type="submit" value="Send">
+    </div>
+</form>
+<br>
+<br>
+<b>
+    Create User:
+</b>
+<form action="/users/" method="post">
+    <p>
+        username (twtrUser.name or fbUser.username):
+        <input type="text" name="username" value="rajaraodv" size="30">
+    </p>
+    <p>
+        account_id (twitterUser.id or fb.id):
+        <input type="text" name="account_id" value="12345" size="30">
+    </p>
+    <p>
+        access_token:
+        <input type="text" name="access_token" value="a123" size="30">
+    </p>
+    <p>
+        photo_url:
+        <input type="text" name="photo_url" value="http://facebook.com/path/to/users/photo.jpg"
+        size="30">
+    </p>
+    <p>
+        account_type:
+        <input type="text" name="account_type" value="facebook" size="30">
+        facebook or twitter
+    </p>
+    <p>
+        first_name:
+        <input type="text" name="first_name" value="raja" size="30">
+    </p>
+    <p>
+        last_name:
+        <input type="text" name="last_name" value="rao" size="30">
+    </p>
+    <div>
+        <input type="submit" value="Send">
+    </div>
+</form>

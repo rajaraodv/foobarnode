@@ -20,6 +20,17 @@ clientAppModule.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
+//An example of creating mocks in Angularjs
+// clientAppModule.config(['$provide', function($provide) {
+//   $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
+// }]);
+// clientAppModule.run(['$httpBackend', function($httpBackend){
+//   $httpBackend.whenGET('scripts/mocks/photoPosts.json').passThrough();
+//   $httpBackend.whenGET('/session/user').respond(200, {'username': 'raja', '_id':'userId12345'}, {header: 'one'});
+//   $httpBackend.whenGET('views/main.html').passThrough();
+//   $httpBackend.whenPOST('/likes').respond(200, {'_id': 'likeid'});
+// }]);
+
 clientAppModule.directive('showonhoverparent', function() {
   return {
     link: function(scope, element) {
@@ -32,6 +43,23 @@ clientAppModule.directive('showonhoverparent', function() {
     }
   };
 });
+clientAppModule.directive('toggleDeleteComment', function() {
+  return {
+    link: function(scope, element) {
+      element.bind('mouseenter', function() {
+        //if the comment's creator is NOT the same as current user, don't show delete-comment button
+        if(scope.comment.creator._id !== scope.appUser._id) {
+          return;
+        }
+        element.find('.deleteComment').show();
+      });
+      element.bind('mouseleave', function() {
+        element.find('.deleteComment').hide();
+      });
+    }
+  };
+});
+
 
 clientAppModule.directive('togglecommentfield', function() {
   return {
@@ -94,12 +122,26 @@ clientAppModule.directive('addTwtrWidget', function() {
   };
 });
 
-clientAppModule.factory('BackendService', ['$resource', function($resource) {
-  var BackendService = $resource('scripts/posts.json');
-  return BackendService;
+clientAppModule.factory('PhotoPostService', ['$resource', '$rootScope', function($resource, $rootScope) {
+  var PhotoPostService = $resource('/feeds/1/10', null, {
+    'query': {
+      'method': 'GET',
+      'isArray':true,
+      'headers': {
+        'X-foobar-username': $rootScope.appUser.username,
+        'X-foobar-access-token': $rootScope.appUser.access_token
+      }
+    }
+  });
+  return PhotoPostService;
 }]);
 
-clientAppModule.factory('LoginService', ['$resource', function($resource){
+clientAppModule.factory('LikesService', ['$resource', function($resource) {
+  var LikesService = $resource('scripts/mocks/like.json');
+  return LikesService;
+}]);
+
+clientAppModule.factory('LoginService', ['$resource', function($resource) {
   var LoginService = $resource('/session/user');
   return LoginService;
 }]);
@@ -115,4 +157,26 @@ clientAppModule.directive('addMasonry', ['$timeout', function($timeout) {
       }, 0);
     }
   };
+}]);
+
+clientAppModule.directive('loginRequired', ['$anchorScroll', function($anchorScroll) {
+  var loginRequired = {
+    link: function(scope, element) {
+      function loginRequired() {
+        if(scope.loggedIn) {
+          return;
+        }
+        //scroll to the top of the page
+        $anchorScroll();
+        //display dialog
+        var element = angular.element('#loginRequiredDialog');
+        element.modal('show');
+      }
+      //bind to click event
+      //Warning: This only shows dialog & doesn't prevent the action w/in ng-click (if you have that on the element).
+      //You need to also verify for loggedIn in ng-click or any other directives that might be triggered when the element was clicked
+      element.bind('click', loginRequired);
+    }
+  };
+  return loginRequired;
 }]);

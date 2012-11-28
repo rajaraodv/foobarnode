@@ -33,6 +33,7 @@
 
     app.configure('production',
     function() {
+        console.log('in production..');
         app.use(express.errorHandler());
                 /*
                 Run *modified* 'yeoman build' in https://github.com/rajaraodv/foobarwebclient. It copies compiled

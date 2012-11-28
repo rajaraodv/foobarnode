@@ -26,43 +26,55 @@
         <h1>
             Most Popular Contest Photos
         </h1>
-            <div id="photoContainer" style="position:relative;height:800px;zoom:1;">
-                <div class="photo" ng-repeat="photoPost in photoPosts">
-                        <a showonhoverparent class="likeBtn axnBtn btn" ng-click='like(photoPost)'><i class="icon-thumbs-up" ></i>Like</a>
-                        <a showonhoverparent togglecommentfield class="commentBtn axnBtn btn" ><i class="icon-comment"></i>Comment</a>
-                    <img ng-src="{{photoPost.photo.url}}" class="photoInfo" add-masonry="photoPost" />
-                    <div >
-                        <label class="caption">
+        <div id="photoContainer" style="position:relative;height:800px;zoom:1;">
+            <div class="photo" ng-repeat="photoPost in photoPosts">
+                <a login-required showonhoverparent class="likeBtn axnBtn btn btn-warning" ng-click='toggleLike(photoPost)'><i ng-class="toggleLikeBtnIcon(photoPost)" ></i>{{toggleLikeBtnName(photoPost)}}</a>
+                <a login-required showonhoverparent togglecommentfield class="commentBtn axnBtn btn btn-warning"><i class="icon-comment"></i>Comment</a>
+                <img ng-src="{{photoPost.photo.url}}" class="photoInfo" add-masonry="photoPost"
+                />
+                <div>
+                    <label class="caption">
                         {{photoPost.photo_caption}}
                         <label>
+                </div>
+                <div class="stats">
+                    <div>
+                        <ng-pluralize count="photoPost.likes_cnt" when="pluralizeLikes">
+                        </ng-pluralize>
                     </div>
-                    <div class="stats">
-                        <div>
-                            <ng-pluralize count="photoPost.likes_cnt" when="pluralizeLikes"></ng-pluralize>
-                        </div>
-                          <div >
-                            <ng-pluralize count="photoPost.comments_cnt" when="pluralizeComments"></ng-pluralize>
-                        </div>
-                    </div>
-
-                    <div class="comments">
-                        <div class="comment" ng-repeat="comment in photoPost.comments">
-                            <table width="100%" cellpadding=2px><tr><td width="24px" valign="top">
-                                <img ng-src="{{comment.creator.photo_url}}" style='width:24px;height:24px' />
-                            </td><td>
-                                <label class="commentTxt">{{comment.text}}</label>
-                            </td><tr></table>
-                        </div>
-
-                    </div>
-                     <div class="commentWrap" ng-show="cf">
-                            <textarea class="c11" placeholder="Add a comment..."></textarea>
-                                <a  class="btn btn-mini commentPostBtn" ><i class="icon-comment"></i>Comment</a>
+                    <div>
+                        <ng-pluralize count="photoPost.comments_cnt" when="pluralizeComments">
+                        </ng-pluralize>
                     </div>
                 </div>
+                <div class="comments">
+                    <div class="comment" toggle-delete-comment ng-repeat="comment in photoPost.comments">
 
+                        <table width="100%" cellpadding=2px>
+                            <tr>
+                                <td width="24px" valign="top">
+                                    <img ng-src="{{comment.creator.photo_url}}" style='width:24px;height:24px'
+                                    />
+                                </td>
+                                <td>
+                                    <label class="commentTxt">
+                                        {{comment.text}}
+                                    </label>
+                                </td>
+                                <td   ng-click="deleteComment(photoPost, comment)"  width="4px">
+                                    <label login-required class="  icon-remove deleteComment"></label>
+                                </td>
+                                <tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="commentWrap" ng-show="cf">
+                    <textarea ng-model="photoPost.newComment" class="c11" placeholder="Add a comment...">
+                    </textarea>
+                    <a class="btn  btn-warning commentPostBtn"  ng-click="addComment(photoPost)"><i class="icon-comment"></i>Comment</a>
+                </div>
             </div>
-
+        </div>
     </div>
     <div id="home_stream">
         <h1>
@@ -75,7 +87,22 @@
     </div>
     <div id="icons_sharing" ng-controller="ShareCtrl">
         <a ng-click="gclick()"><img id="google" src="/img/icon_social_g+.png"></a>
-        <a ng-click="twtClick()" ><img id="twitter" src="/img/icon_social_twitter.png"></a>
+        <a ng-click="twtClick()"><img id="twitter" src="/img/icon_social_twitter.png"></a>
         <a ng-click="fbsClick()"><img src="/img/icon_social_fb.png"></a>
+    </div>
+
+    <!-- Below is the 'login required' dialog html used to alert user that login is required. This is  triggered by loginRequired directive -->
+    <div class="modal hide fade" id="loginRequiredDialog">
+        <div class="modal-header">
+            <p>
+                Alert! login required.
+            </p>
+        </div>
+        <div class="modal-body">
+            <div class="alert">
+                Please click on "Log In"-link to login via Twitter or Facebook in order
+                to Like or add Comment.
+            </div>
+        </div>
     </div>
 </div>

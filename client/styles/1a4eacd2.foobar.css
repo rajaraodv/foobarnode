@@ -385,13 +385,18 @@ a:hover {
 }
 
 .likeBtn {
-    left: 20px;
+    left:10px;
 }
 
 .commentBtn {
-    left: 90px;
+    left: 95px;
 }
 
+.deleteComment {
+   display:none;
+   top:0px;
+   cursor: pointer;
+}
 .commentPostBtn {
     float: right;
 }
@@ -412,7 +417,7 @@ a:hover {
 
 .axnBtn {
     position: absolute;
-    top: 20px;
+    top: 10px;
     display: none;
 }
 
