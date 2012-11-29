@@ -145,8 +145,8 @@ HTTP 400 (Invalid Request)
 "last_name": "new last name", 
 “photo_url”, “http://facebook.com/photo.jpg”
 }
-
 ```
+
 ####Response(s):
 
 ```
