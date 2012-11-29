@@ -22,11 +22,11 @@
             </div>
         </div>
     </div>
-    <div id="home_photos">
+    <div id="home_photos" when-scrolled="loadPhotoPosts()">
         <h1>
             Most Popular Contest Photos
         </h1>
-        <div id="photoContainer" style="position:relative;height:800px;zoom:1;">
+        <div id="photoContainer" style="position:relative;height:800px;zoom:1;" >
             <div class="photo" ng-repeat="photoPost in photoPosts">
                 <a login-required showonhoverparent class="likeBtn axnBtn btn btn-warning" ng-click='toggleLike(photoPost)'><i ng-class="toggleLikeBtnIcon(photoPost)" ></i>{{toggleLikeBtnName(photoPost)}}</a>
                 <a login-required showonhoverparent togglecommentfield class="commentBtn axnBtn btn btn-warning"><i class="icon-comment"></i>Comment</a>

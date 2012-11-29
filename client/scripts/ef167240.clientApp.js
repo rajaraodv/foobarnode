@@ -1,35 +1,21 @@
-'use strict'; /*global  angular:false MainCtrl:false EditCtrl:false GalleryCtrl:false */
+/*global  angular:false MainCtrl:false  GalleryCtrl:false */
+'use strict';
 
-var clientAppModule = angular.module('clientApp', ['mongolab']);
+var clientAppModule = angular.module('clientApp', ['ngResource']);
 clientAppModule.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
   when('/', {
     controller: MainCtrl,
     templateUrl: 'views/main.html'
   }).
-  when('/edit/:projectId', {
-    controller: EditCtrl,
-    templateUrl: 'views/detail.html'
-  }).
   when('/gallery', {
-    controller: GalleryCtrl,
-    templateUrl: 'views/gallery.html'
+    controller: MainCtrl,
+    templateUrl: 'views/main.html'
   }).
   otherwise({
     redirectTo: '/'
   });
 }]);
-
-//An example of creating mocks in Angularjs
-// clientAppModule.config(['$provide', function($provide) {
-//   $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
-// }]);
-// clientAppModule.run(['$httpBackend', function($httpBackend){
-//   $httpBackend.whenGET('scripts/mocks/photoPosts.json').passThrough();
-//   $httpBackend.whenGET('/session/user').respond(200, {'username': 'raja', '_id':'userId12345'}, {header: 'one'});
-//   $httpBackend.whenGET('views/main.html').passThrough();
-//   $httpBackend.whenPOST('/likes').respond(200, {'_id': 'likeid'});
-// }]);
 
 clientAppModule.directive('showonhoverparent', function() {
   return {
@@ -43,6 +29,7 @@ clientAppModule.directive('showonhoverparent', function() {
     }
   };
 });
+
 clientAppModule.directive('toggleDeleteComment', function() {
   return {
     link: function(scope, element) {
@@ -65,6 +52,9 @@ clientAppModule.directive('togglecommentfield', function() {
   return {
     link: function(scope, element) {
       element.bind('click', function() {
+        if(!scope.loggedIn) {
+          return;
+        }
         var commentWrap = element.parent().find('.commentWrap');
         commentWrap.toggle();
         commentWrap.find('.c11').focus();
@@ -85,7 +75,7 @@ clientAppModule.directive('addTwtrWidget', function() {
         id: 'twitter_widget_div',
         version: 2,
         type: 'search',
-        search: 'node.js',
+        search: 'cloudfoundry, vmware',
         interval: 20000,
         title: '',
         subject: '',
@@ -122,11 +112,12 @@ clientAppModule.directive('addTwtrWidget', function() {
   };
 });
 
+//deprecated as 'Promise' doesnt allow infinite scrolling
 clientAppModule.factory('PhotoPostService', ['$resource', '$rootScope', function($resource, $rootScope) {
   var PhotoPostService = $resource('/feeds/1/10', null, {
     'query': {
       'method': 'GET',
-      'isArray':true,
+      'isArray': true,
       'headers': {
         'X-foobar-username': $rootScope.appUser.username,
         'X-foobar-access-token': $rootScope.appUser.access_token
@@ -180,3 +171,15 @@ clientAppModule.directive('loginRequired', ['$anchorScroll', function($anchorScr
   };
   return loginRequired;
 }]);
+
+clientAppModule.directive('whenScrolled', function() {
+  return function(scope, elm, attr) {
+    var raw = elm[0];
+
+    elm.bind('scroll', function() {
+      if(raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+        scope.$apply(attr.whenScrolled);
+      }
+    });
+  };
+});

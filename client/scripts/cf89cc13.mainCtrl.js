@@ -2,9 +2,51 @@
 /*jshint camelcase:false */
 'use strict';
 
+function MainCtrl($scope, PhotoPostService, $http) {
+  $scope.photoPosts = [];
+  $scope.page = 1;
+  $scope.limit = 10;
+  $scope.noMorePosts = false;
 
-function MainCtrl($scope, Project, PhotoPostService, $http) {
-  $scope.photoPosts = PhotoPostService.query();
+//   $('#home_stream').css('display', 'none');
+//     $('#billboard').css('display', 'none');
+// $('#home_photos').css('width', '850px');
+// $('#icons_sharing').css('display', 'none');
+
+
+  $scope.loadPhotoPosts = function() {
+    if($scope.noMorePosts) {
+      return;
+    }
+    var requestConfig = {
+      'method': 'GET',
+      'url': '/feeds/' + $scope.page + '/' + $scope.limit,
+      'data': null,
+      'headers': null
+    };
+
+    var response = $http(requestConfig);
+    response.success(function(posts) {
+      if(posts instanceof Array) {
+        //If nothing is returned from the server, set $scope.noMorePosts = true
+        if(posts.length === 0) {
+          $scope.noMorePosts = true;
+          return;
+        }
+        $scope.photoPosts = $scope.photoPosts.concat(posts);
+        $scope.page += 1;
+      }
+    });
+
+    response.error(function(data) {
+      //If nothing is returned from the server or there was an error, set $scope.noMorePosts = true
+      $scope.noMorePosts = true;
+      //todo: make error better
+      alert(data.Error);
+    });
+  };
+
+  $scope.loadPhotoPosts();
 
   $scope.container = $('#photoContainer');
   $scope.container.imagesLoaded(function() {
@@ -109,8 +151,8 @@ function MainCtrl($scope, Project, PhotoPostService, $http) {
         index++;
 
         if(photoPost.comments[c]._id === comment._id) {
-            break;
-          }
+          break;
+        }
       }
 
       photoPost.comments.splice(index, 1);
@@ -165,4 +207,4 @@ function MainCtrl($scope, Project, PhotoPostService, $http) {
   };
 }
 
-MainCtrl.$inject = ['$scope', 'Project', 'PhotoPostService', '$http'];
+MainCtrl.$inject = ['$scope', 'PhotoPostService', '$http'];

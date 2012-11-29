@@ -1,7 +1,7 @@
 # 1 (undefined, #undefined)
 CACHE MANIFEST
 
-# Time: Wed Nov 28 2012 13:35:48 GMT-0800 (PST)
+# Time: Wed Nov 28 2012 21:35:27 GMT-0800 (PST)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/#/
@@ -39,17 +39,17 @@ http://localhost:3501/img/icons_mobile_on.png
 http://localhost:3501/img/nav_sep.png
 http://widgets.twimg.com/j/2/widget.css
 http://www.google-analytics.com/ga.js
-scripts/672d0b3c.scripts.js
+scripts/cc28b8bd.scripts.js
 scripts/vendor/051af58b.bootstrap.min.js
+scripts/vendor/44649c74.angular.js
 scripts/vendor/496d0270.googleAnalytics.js
 scripts/vendor/75d59a1f.angular-resource.min.js
-scripts/vendor/9cb685d9.angular.min.js
 scripts/vendor/c3fdd056.twitterWidget.min.js
 scripts/vendor/e1288116.jquery-1.8.3.min.js
 scripts/vendor/f1739077.jquery.imagesloaded.min.js
 scripts/vendor/fc2d7669.jquery.masonry.min.js
-styles/1a4eacd2.foobar.css
-styles/a3ab6844.main.css
+styles/b25a4898.foobar.css
+styles/e5b7f6d6.main.css
 styles/fbe0125f.bootstrap.css
 
 NETWORK:
