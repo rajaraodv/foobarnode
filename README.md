@@ -19,7 +19,7 @@ The server follows near ‘strict’ RESTful patterns and provides about 18 API 
 # Users
 ### Create user:
 #### Request:
-`HTTP POST: `<server>/users/`
+`HTTP POST: <server>/users/`
 
 * Headers:
   * Content-Type: application/json (required)
@@ -75,9 +75,9 @@ HTTP 400 (Invalid Request - when content-type or something are improperly sent/n
 
 ### Get user:
 #### Request:
-`Two ways:  HTTP GET:  1. `<server>/users/{id}  2. `<server>/users/me`
+`Two ways:  HTTP GET:  1. <server>/users/{id}  2. `<server>/users/me`
 
-`Example: `<server>/users/50688fc9eadee00000000001 or <sever>/users/me`
+`Example: <server>/users/50688fc9eadee00000000001 or <sever>/users/me`
 
 * Headers:
   * Content-Type: application/json  must not send
@@ -124,9 +124,9 @@ HTTP 400 (Invalid Request)
 
 ### Update user:
 #### Request:
-`HTTP PUT: Two ways: 1. `<server>/users/{id} or 2. `<server>/users/me`
+`HTTP PUT: Two ways: 1. <server>/users/{id} or 2. <server>/users/me`
 
-`Example: `<server>/users/50688fc9eadee00000000001 or `<server>/users/me`
+`Example: <server>/users/50688fc9eadee00000000001 or <server>/users/me`
 
 * Headers:
   * Content-Type: application/json (required)
@@ -179,9 +179,9 @@ Content-type `application/json` is required if you are updating something in the
 
 ### Delete user:
 #### Request:
-`HTTP DELETE: `<server>/users/{id}`
+`HTTP DELETE: <server>/users/{id}`
 
-`Example: `<server>/users/50688fc9eadee00000000001`
+`Example: <server>/users/50688fc9eadee00000000001`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -219,7 +219,7 @@ HTTP 400 (Invalid Request)
 #Photo Posts (Individual Post w/ a Photo)
 ### Create photoposts:
 ####Request:
-`HTTP POST: `<server>/photoposts/`
+`HTTP POST: <server>/photoposts/`
 
 * Headers:
   * Content-Type: multipart/form-data (required)
@@ -268,7 +268,7 @@ HTTP 200
 ### Get PhotoPost (Returns detailed information of a given photopost - Could be used for Detailed-view)
 
 #### Request:
-`HTTP POST: `<server>/photoposts/{id}`
+`HTTP POST: <server>/photoposts/{id}`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -331,7 +331,7 @@ HTTP 200
 
 ### Update PhotoPost: (Use this to add caption/description to photo)
 ####Request:
-`HTTP PUT: `<server>/photoposts/{id}`
+`HTTP PUT: <server>/photoposts/{id}`
 
 * Headers:
   * Content-Type: application/json (required)
@@ -388,7 +388,7 @@ HTTP 401
 
 ###Delete PhotoPost:
 ####Request:
-`HTTP DELETE: `<server>/photoposts/{id}`
+`HTTP DELETE: <server>/photoposts/{id}`
 
 `Example: `<server>/photoposts/50688fc9eadee00000000001`
 
@@ -426,9 +426,9 @@ HTTP 400 (Invalid Request)
 
 ###Get Photo (photo itself):
 ####Request:
-`HTTP GET: `<server>/photos/{id}`
+`HTTP GET: <server>/photos/{id}`
 
-`Example: `<server>/photos/5068ed9f00c0f50000000003`
+`Example: <server>/photos/5068ed9f00c0f50000000003`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -446,7 +446,7 @@ HTTP 200  (actual photo will be sent back)
 #Comments
 ###Create comment:
 ####Request:
-`HTTP POST: `<server>/comments/`
+`HTTP POST: <server>/comments/`
 
 * Headers:
   * Content-Type: application/json (required)
@@ -500,9 +500,9 @@ HTTP 404
 
 ###Get Comment:
 ####Request:
-`HTTP GET: `<server>/comments/{id}`
+`HTTP GET: <server>/comments/{id}`
 
-`Example: `<server>/photos/5068f0db01aeb10000000001`
+`Example: <server>/photos/5068f0db01aeb10000000001`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -535,7 +535,7 @@ HTTP 200
 
 ###Update comment:
 ####Request:
-`HTTP PUT: `<server>/comments/{id}`
+`HTTP PUT: <server>/comments/{id}`
 
 * Headers:
   * Content-Type: application/json (required)
@@ -583,9 +583,9 @@ HTTP 401
 
 ###Delete comment:
 ###Request:
-`HTTP DELETE: `<server>/comments/{id}`
+`HTTP DELETE: <server>/comments/{id}`
 
-`Example: `<server>/comments/50688fc9eadee00000000001`
+`Example: <server>/comments/50688fc9eadee00000000001`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -624,7 +624,7 @@ HTTP 400 (Invalid Request)
 #Likes
 ###Create like:
 ####Request:
-`HTTP POST: `<server>/likes/`
+`HTTP POST: <server>/likes/`
 
 * Headers:
   * Content-Type: application/json (required)
@@ -679,9 +679,9 @@ HTTP 404
 
 ###Get Like:
 ####Request:
-`HTTP GET: `<server>/likes/{id}`
+`HTTP GET: <server>/likes/{id}`
 
-`Example: `<server>/likes/5068f0db01aeb10000000001`
+`Example: <server>/likes/5068f0db01aeb10000000001`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -714,9 +714,9 @@ HTTP 200
 
 ###Delete ‘Like’ (Method 1):
 ####Request:
-`HTTP DELETE: `<server>/likes/{id}`
+`HTTP DELETE: <server>/likes/{id}`
 
-`Example: `<server>/likes/50688fc9eadee00000000001`
+`Example: <server>/likes/50688fc9eadee00000000001`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -756,9 +756,9 @@ HTTP 400 (Invalid Request)
 
 ### Delete ‘Like’ (Method 2):
 ####Request:
-`HTTP DELETE: `<server>/likes/photoposts/{:photoPostId}`
+`HTTP DELETE: <server>/likes/photoposts/{:photoPostId}`
 
-`Example: `<server>/likes/photoposts/50688fc9eadee00000000001`
+`Example: <server>/likes/photoposts/50688fc9eadee00000000001`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -793,9 +793,9 @@ HTTP 400 (Invalid Request)
 #Feeds
 ###Get like:
 ####Request:
-`HTTP GET: `<server>/feeds/${pageNumber}/${numberOfItems}`
+`HTTP GET: <server>/feeds/${pageNumber}/${numberOfItems}`
 
-`Example:  `<server>/feeds/1/10`
+`Example:  <server>/feeds/1/10`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
@@ -893,9 +893,9 @@ HTTP 200
 ###Get Products:
 
 ####Request:
-`HTTP GET: `<server>/products`
+`HTTP GET: <server>/products`
 
-`Example:  `<server>/products`
+`Example:  <server>/products`
 
 * Headers:
   * Content-Type: application/json (Don’t send)
