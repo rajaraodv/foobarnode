@@ -1,8 +1,8 @@
-Restful Node.hs server for Foobar project - More details coming soon
+# Foobarnode - RESTful Node.js server APIs
 
 [![Build Status](https://secure.travis-ci.org/rajaraodv/foobarnode.png?branch=master)](https://travis-ci.org/rajaraodv/foobarnode)
 
-# Foobarnode - RESTful Node.js server APIs
+
 
 
 
