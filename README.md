@@ -1,3 +1,4 @@
+![image](logo_foobar_full.png)
 # Foobarnode - RESTful Node.js server APIs
 ###### This is Node.js server for Cloud Foundry's Foobar Project. Server is running at: [http://foobarnode.cloudfoundry.com](http://foobarnode.cloudfoundry.com/)
 
