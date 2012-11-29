@@ -19,7 +19,7 @@ Server is running at: [http://foobarnode.cloudfoundry.com](http://foobarnode.clo
 # Users
 ### Create user: 
 #### Request:
-* HTTP POST: server/users/
+`HTTP POST: <server>/users/`
 
 * Headers: 
   * Content-Type: application/json (required)
@@ -75,11 +75,9 @@ HTTP 400 (Invalid Request - when content-type or something are improperly sent/n
 
 ### Get user: 
 #### Request:
-* HTTP GET: Two ways: 
-  1. `<server>/users/{id}`  
-  2. `<server>/users/me`
+`Two ways:  HTTP GET:  1. <server>/users/{id}  2. <server>/users/me`
 
-* Example: `<server>/users/50688fc9eadee00000000001 or <sever>/users/me`
+`Example: <server>/users/50688fc9eadee00000000001 or <sever>/users/me`
 
 * Headers: 
   * Content-Type: application/json  must not send
@@ -126,9 +124,9 @@ HTTP 400 (Invalid Request)
 
 ### Update user: 
 #### Request:
-* HTTP PUT: Two ways: `1. <server>/users/{id} or 2. <server>/users/me`
+`HTTP PUT: Two ways: 1. <server>/users/{id} or 2. <server>/users/me`
 
-* Example: `<server>/users/50688fc9eadee00000000001 or <server>/users/me`
+`Example: <server>/users/50688fc9eadee00000000001 or <server>/users/me`
 
 * Headers: 
   * Content-Type: application/json (required)
@@ -181,9 +179,9 @@ Content-type `application/json` is required if you are updating something in the
 
 ### Delete user: 
 #### Request:
-* HTTP DELETE: `<server>/users/{id}`
+`HTTP DELETE: <server>/users/{id}`
 
-* Example: `<server>/users/50688fc9eadee00000000001`
+`Example: <server>/users/50688fc9eadee00000000001`
 
 * Headers: 
   * Content-Type: application/json (Don’t send)
@@ -195,9 +193,9 @@ Content-type `application/json` is required if you are updating something in the
 
   N/A
 
-* Response(s):
+####Response(s):
 
- ```
+``` 
  HTTP 200
  {
  "status”: “OK”
@@ -211,8 +209,8 @@ HTTP 400 (Invalid Request)
 {
   "Error": "Invalid Id. It must conform to MongoDB's objectId format"
 }
-
 ```
+
 #### Notes / Tips for delete user: 
 1. You can delete currently logged in user only and not other users as there is no ACL.
 2. {id} is required & must be currently logged in user’s MongoDB id.
@@ -221,7 +219,7 @@ HTTP 400 (Invalid Request)
 #Photo Posts (Individual Post w/ a Photo)
 ### Create photoposts: 
 ####Request:
-* HTTP POST: `<server>/photoposts/`
+`HTTP POST: <server>/photoposts/`
 
 * Headers: 
   * Content-Type: multipart/form-data (required)
@@ -270,7 +268,7 @@ HTTP 200
 ### Get PhotoPost (Returns detailed information of a given photopost - Could be used for Detailed-view)
 
 #### Request:
-* HTTP POST: `<server>/photoposts/{id}`
+`HTTP POST: <server>/photoposts/{id}`
 
 * Headers: 
   * Content-Type: application/json (Don’t send)  
@@ -333,7 +331,7 @@ HTTP 200
 
 ### Update PhotoPost: (Use this to add caption/description to photo)
 ####Request:
-* HTTP PUT: `<server>/photoposts/{id}`
+`HTTP PUT: <server>/photoposts/{id}`
 
 * Headers: 
   * Content-Type: application/json (required)
@@ -390,9 +388,9 @@ HTTP 401
 
 ###Delete PhotoPost: 
 ####Request:
-* HTTP DELETE: `<server>/photoposts/{id}`
+`HTTP DELETE: <server>/photoposts/{id}`
 
-* Example: `<server>/photoposts/50688fc9eadee00000000001`
+`Example: <server>/photoposts/50688fc9eadee00000000001`
 
 * Headers: 
   * Content-Type: application/json (Don’t send)
@@ -404,7 +402,7 @@ HTTP 401
 
 N/A
 
-* Response(s):
+####Response(s):
 
 ```
 HTTP 200
@@ -428,9 +426,9 @@ HTTP 400 (Invalid Request)
 
 ###Get Photo (photo itself): 
 ####Request:
-* HTTP GET: `<server>/photos/{id}`
+`HTTP GET: <server>/photos/{id}`
 
-* Example: `<server>/photos/5068ed9f00c0f50000000003`
+`Example: <server>/photos/5068ed9f00c0f50000000003`
 
 * Headers: 
   * Content-Type: application/json (Don’t send)
@@ -448,7 +446,7 @@ HTTP 200  (actual photo will be sent back)
 #Comments
 ###Create comment: 
 ####Request:
-* HTTP POST: `<server>/comments/`
+`HTTP POST: <server>/comments/`
 
 * Headers: 
   * Content-Type: application/json (required)
@@ -502,9 +500,9 @@ HTTP 404
 
 ###Get Comment: 
 ####Request:
-* HTTP GET: `<server>/comments/{id}`
+`HTTP GET: <server>/comments/{id}`
 
-* Example: `<server>/photos/5068f0db01aeb10000000001`
+`Example: <server>/photos/5068f0db01aeb10000000001`
 
 * Headers: 
   * Content-Type: application/json (Don’t send)
