@@ -1,3 +1,4 @@
+<p align="center">
 ![image](https://raw.github.com/rajaraodv/foobarnode/master/logo_foobar_full.png)
 
 # Foobarnode - RESTful Node.js server APIs
@@ -24,9 +25,9 @@ The server follows near ‘strict’ RESTful patterns and provides about 18 API 
 `HTTP POST: <server>/users/`
 
 * Headers:
-  * Content-Type: application/json (required)
+  * Content-Type: `application/json` (required)
   * X-foobar-username: `<username>`
-  * X-foobar-access-token: <access token> (optional)
+  * X-foobar-access-token: `<access token>` (optional)
 
 * Request Body
 
@@ -69,11 +70,14 @@ HTTP 400 (Invalid Request - when content-type or something are improperly sent/n
 }
 ```
 #### Notes / Tips for create user:
-1. Content-type application/json is required
+1. Content-type `application/json` is required
 2. You can send `username` and `access_token` in POST body, or, in `X-foobar-username` and `X-foobar-access-token` headers. In general setting in header is preferred for most cases.
-3. `account_type` parameter is required and can be either `twitter` or `facebook`.
-4. `username` REQUIRED. After login via FB/TW, get `twtrUser.name` or `fbUser.username` and pass that.
-5. `account_id` REQUIRED. After login via FB/TW, get `twitterUser.id` or `facebookUser.id` & pass that.
+3. `username` REQUIRED. After login via FB/TW, get `twtrUser.name` or `fbUser.username` and pass that.
+4. `account_id` REQUIRED. After login via FB/TW, get `twitterUser.id` or `facebookUser.id` & pass that.
+
+5. `access_token` OPTIONAL is the access_token from twitter/facebook. At this point server doesn't use this (as we don't post anything to FB/Twitter on behalf of user).
+6. `account_type` parameter is required and can be either `twitter` or `facebook`.
+7. **NOTE**: After the user is created on our server (via Twitter/FB), our server will generate a **custom** `access_token` and send it as part of create-user response. Please use this foobar's `access_token` to make further authenticated requests.
 
 ### Get user:
 #### Request:
@@ -82,9 +86,9 @@ HTTP 400 (Invalid Request - when content-type or something are improperly sent/n
 `Example: <server>/users/50688fc9eadee00000000001 or <sever>/users/me`
 
 * Headers:
-  * Content-Type: application/json  must not send
+  * Content-Type: `application/json`  must not send
   * X-foobar-username: `<username>` required
-  * X-foobar-access-token: <access token> required
+  * X-foobar-access-token: `<access token>` required
 
 #### Response(s):
 ```
@@ -120,8 +124,8 @@ HTTP 400 (Invalid Request)
 ```
 
 #### Notes / Tips for get user:
-1. Must NOT send Content-type application/json header as there is no body-content.
-2. X-foobar-username and X-foobar-access-token headers are Required.
+1. Must NOT send Content-type `application/json` header as there is no body-content.
+2. X-foobar-username and `X-foobar-access-token` headers are Required.
 3. id is required. MongoDB’s default id(like 50688fc9eadee00000000001) or “me”
 
 ### Update user:
@@ -131,10 +135,10 @@ HTTP 400 (Invalid Request)
 `Example: <server>/users/50688fc9eadee00000000001 or <server>/users/me`
 
 * Headers:
-  * Content-Type: application/json (required)
+  * Content-Type: `application/json` (required)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
-  * X-foobar-access-token-new: <new access token> (Optional - Only required (as header) if you want to update access_token itself;  Pass both access_token and this one to update it)
+  * X-foobar-access-token: `<access token>` (required)
+  * X-foobar-access-token-new: `<new access token>` (Optional - Only required (as header) if you want to update access_token itself;  Pass both `access_token` and this one to update it)
 
 * Request Body:
 
@@ -175,7 +179,7 @@ HTTP 400 (Invalid Request)
 #### Notes / Tips for update user:
 1. You can update currently logged in user only and not other users as there is no ACL.
 2. `{id}` is required & must be currently logged in user’s MongoDB id.
-Content-type `application/json` is required if you are updating something in the body.
+Content-type ``application/json`` is required if you are updating something in the body.
 3. To just update `access_token`: set `X-foobar-access-token-new` header and send {} in the body
 
 
@@ -186,9 +190,9 @@ Content-type `application/json` is required if you are updating something in the
 `Example: <server>/users/50688fc9eadee00000000001`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 
 * Request Body
@@ -216,7 +220,7 @@ HTTP 400 (Invalid Request)
 #### Notes / Tips for delete user:
 1. You can delete currently logged in user only and not other users as there is no ACL.
 2. {id} is required & must be currently logged in user’s MongoDB id.
-3. Don’t send Content-type application/json
+3. Don’t send Content-type `application/json`
 
 #Photo Posts (Individual Post w/ a Photo)
 ### Create photoposts:
@@ -226,14 +230,14 @@ HTTP 400 (Invalid Request)
 * Headers:
   * Content-Type: multipart/form-data (required)
   * X-foobar-username: `<username>`
-  * X-foobar-access-token: <access token>
-  * X-foobar-product-id: <product_id> required
+  * X-foobar-access-token: `<access token>`
+  * X-foobar-product-id: `<product_id>` required
 
 * Request Body (Note: Create a form w/ the following details):
 	1. Upload Photo’s Field name `must` be: `pic` (required)
 Headers `X-foobar-username (username) and X-foobar-access-token` is required.
     2. `X-foobar-product-id`: Simply a number (like 1, 2 etc), indicating the foobar product’s id.
-    3. Upload the photo to /photoposts/` end point with `enctype=multipart/form-data`
+    3. Upload the photo to `/photoposts/` end point with `enctype=multipart/form-data`
 
 ####Response(s):
 
@@ -273,9 +277,9 @@ HTTP 200
 `HTTP POST: <server>/photoposts/{id}`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>`  (not required)
-  * X-foobar-access-token: <access token> (not required)
+  * X-foobar-access-token: `<access token>` (not required)
 
 #### Response(s):
 
@@ -336,9 +340,9 @@ HTTP 200
 `HTTP PUT: <server>/photoposts/{id}`
 
 * Headers:
-  * Content-Type: application/json (required)
+  * Content-Type: `application/json` (required)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 * Request Body
 
@@ -395,9 +399,9 @@ HTTP 401
 `Example: `<server>/photoposts/50688fc9eadee00000000001`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 
 * Request Body
@@ -433,9 +437,9 @@ HTTP 400 (Invalid Request)
 `Example: <server>/photos/5068ed9f00c0f50000000003`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>`
-  * X-foobar-access-token: <access token>
+  * X-foobar-access-token: `<access token>`
 
 * Request Body
 
@@ -451,7 +455,7 @@ HTTP 200  (actual photo will be sent back)
 `HTTP POST: <server>/comments/`
 
 * Headers:
-  * Content-Type: application/json (required)
+  * Content-Type: `application/json` (required)
   * X-foobar-username: `<username>` (required)
   * X-foobar-access-token: <access token> (required)
 
@@ -507,9 +511,9 @@ HTTP 404
 `Example: <server>/photos/5068f0db01aeb10000000001`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>`
-  * X-foobar-access-token: <access token>
+  * X-foobar-access-token: `<access token>`
 
 * Request Body
 
@@ -540,9 +544,9 @@ HTTP 200
 `HTTP PUT: <server>/comments/{id}`
 
 * Headers:
-  * Content-Type: application/json (required)
+  * Content-Type: `application/json` (required)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 * Request Body
 
@@ -590,9 +594,9 @@ HTTP 401
 `Example: <server>/comments/50688fc9eadee00000000001`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 
 * Request Body
@@ -620,7 +624,7 @@ HTTP 400 (Invalid Request)
 ####Notes / Tips for delete comment:
 1. You can only delete currently logged in user’s comment
 2. `{id}` is required & must be currently logged in user’s MongoDB id.
-3. Don’t send `Content-type application/json`
+3. Don’t send `Content-type `application/json``
 
 
 #Likes
@@ -629,9 +633,9 @@ HTTP 400 (Invalid Request)
 `HTTP POST: <server>/likes/`
 
 * Headers:
-  * Content-Type: application/json (required)
+  * Content-Type: `application/json` (required)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 * Request Body
 
@@ -686,9 +690,9 @@ HTTP 404
 `Example: <server>/likes/5068f0db01aeb10000000001`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>`
-  * X-foobar-access-token: <access token>
+  * X-foobar-access-token: `<access token>`
 
 * Request Body
 
@@ -721,9 +725,9 @@ HTTP 200
 `Example: <server>/likes/50688fc9eadee00000000001`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 
 * Request Body
@@ -752,7 +756,7 @@ HTTP 400 (Invalid Request)
 ####Notes / Tips for delete user:
 1. You can only delete currently logged in user’s comment
 2. `{id}` is required & must be currently logged in user’s MongoDB id.
-3. Don’t send Content-type `application/json `
+3. Don’t send Content-type ``application/json` `
 
 
 
@@ -763,9 +767,9 @@ HTTP 400 (Invalid Request)
 `Example: <server>/likes/photoposts/50688fc9eadee00000000001`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 
 * Request Body
@@ -800,9 +804,9 @@ HTTP 400 (Invalid Request)
 `Example:  <server>/feeds/1/10`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 * Request Body
 
@@ -900,9 +904,9 @@ HTTP 200
 `Example:  <server>/products`
 
 * Headers:
-  * Content-Type: application/json (Don’t send)
+  * Content-Type: `application/json` (Don’t send)
   * X-foobar-username: `<username>` (required)
-  * X-foobar-access-token: <access token> (required)
+  * X-foobar-access-token: `<access token>` (required)
 
 * Request Body
 
