@@ -59,10 +59,7 @@ HTTP 200
 “access_token”: “994adb5eedb5fb83636bf1cf498e4cb5” //Note: Use this for all further requests
 }
 
-HTTP 403
-{
-   "Error”: "User with this username & access_token already exists
-}
+
 
 HTTP 400 (Invalid Request - when content-type or something are improperly sent/not sent)
 {
@@ -78,6 +75,7 @@ HTTP 400 (Invalid Request - when content-type or something are improperly sent/n
 5. `access_token` OPTIONAL is the access_token from twitter/facebook. At this point server doesn't use this (as we don't post anything to FB/Twitter on behalf of user).
 6. `account_type` parameter is required and can be either `twitter` or `facebook`.
 7. **NOTE**: After the user is created on our server (via Twitter/FB), our server will generate a **custom** `access_token` and send it as part of create-user response. Please use this foobar's `access_token` to make further authenticated requests.
+8. If the user already exists, we will simply send that user back (instead of throwing user-already-exists error).
 
 ### Get user:
 #### Request:
