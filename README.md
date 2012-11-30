@@ -31,7 +31,7 @@ The server follows near ‘strict’ RESTful patterns and provides about 18 API 
 
 * Request Body
 
-```
+```javascript
 {
 "username": "rajaraodv", //REQUIRED This is twtrUser.name or fbUser.username
 "access_token":"a123",
