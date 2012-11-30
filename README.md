@@ -36,16 +36,16 @@ The server follows near ‘strict’ RESTful patterns and provides about 18 API 
 "username": "rajaraodv", //REQUIRED This is twtrUser.name or fbUser.username
 "access_token":"a123",
 "account_type": "facebook",
-“first_name”: “raja”,
-“account_id”, “1234567” //REQUIRED: This is <twitterUser>.id or <facebookUser>.id
-“photo_url”, “http://facebook.com/photo.jpg”
+"first_name": "raja",
+"account_id", "1234567" //REQUIRED: This is <twitterUser>.id or <facebookUser>.id
+"photo_url", "http://facebook.com/photo.jpg"
 }
 
 ```
 
 #### Response(s):
-```
 
+```javascript
 HTTP 200
 
 {
@@ -56,7 +56,7 @@ HTTP 200
 "first_name":"raja",
 "photo_url":"http://facebook.com/photo.jpg",
 "_id":"50687c2e9455fe0000000006",
-“access_token”: “994adb5eedb5fb83636bf1cf498e4cb5” //Note: Use this for all further requests
+"access_token": "994adb5eedb5fb83636bf1cf498e4cb5" //Note: Use this for all further requests
 }
 
 
@@ -66,6 +66,7 @@ HTTP 400 (Invalid Request - when content-type or something are improperly sent/n
   "Error": "invalid json. Tip: Check if headers (e.g. content-type), body(e.g. valid json) & query(e.g. encoding) parameters are all valid"
 }
 ```
+
 #### Notes / Tips for create user:
 1. Content-type `application/json` is required
 2. You can send `username` and `access_token` in POST body, or, in `X-foobar-username` and `X-foobar-access-token` headers. In general setting in header is preferred for most cases.
@@ -89,7 +90,8 @@ HTTP 400 (Invalid Request - when content-type or something are improperly sent/n
   * X-foobar-access-token: `<access token>` required
 
 #### Response(s):
-```
+
+```javascript
 HTTP 200
 {
   "createdAt": "2012-09-30T18:30:33.961Z",
@@ -124,7 +126,7 @@ HTTP 400 (Invalid Request)
 #### Notes / Tips for get user:
 1. Must NOT send Content-type `application/json` header as there is no body-content.
 2. X-foobar-username and `X-foobar-access-token` headers are Required.
-3. id is required. MongoDB’s default id(like 50688fc9eadee00000000001) or “me”
+3. id is required. MongoDB’s default id(like 50688fc9eadee00000000001) or "me"
 
 ### Update user:
 #### Request:
@@ -140,18 +142,19 @@ HTTP 400 (Invalid Request)
 
 * Request Body:
 
- ```
+ ```javascript
 {
 "username": "rajaraodv",
 "account_type": "facebook",
 "last_name": "new last name",
-“photo_url”, “http://facebook.com/photo.jpg”
+"photo_url", "http://facebook.com/photo.jpg"
 }
 ```
 
 ####Response(s):
 
-```
+```javascript
+
 HTTP 200
 {
 "createdAt":"2012-09-30T17:06:54.983Z",
@@ -199,10 +202,11 @@ Content-type ``application/json`` is required if you are updating something in t
 
 ####Response(s):
 
-```
+```javascript
+
  HTTP 200
  {
- "status”: “OK”
+ "status": "OK"
  }
 
 HTTP 400 (Invalid Request - when content-type or something are improperly sent/not sent)
@@ -239,7 +243,7 @@ Headers `X-foobar-username (username) and X-foobar-access-token` is required.
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
   "__v": 0,
@@ -265,7 +269,7 @@ HTTP 200
    "liked_by": ["506f89bab95a52d66b000001"], //User Ids of those who liked
   "comments_cnt": 0,
   "likes_cnt": 1, //# of likes
-  "photo_caption": “” //Text user would add as a caption or description of the photo
+  "photo_caption": "" //Text user would add as a caption or description of the photo
 }
 ```
 
@@ -281,7 +285,7 @@ HTTP 200
 
 #### Response(s):
 
-```
+```javascript
 HTTP 200
 {
   "_id": "5068ed9f00c0f50000000008",
@@ -325,7 +329,7 @@ HTTP 200
   ],
   "comments_cnt": 2,
   "likes_cnt": 0,
-   “photo_caption”: “Golden Gate Bridge”
+   "photo_caption": "Golden Gate Bridge"
 }
 ```
 
@@ -344,7 +348,7 @@ HTTP 200
 
 * Request Body
 
-```
+```javascript
 {
 "photo_caption": "This is photo of Golden Gate bridge",
 }
@@ -352,7 +356,7 @@ HTTP 200
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
   "__v": 0,
@@ -376,7 +380,7 @@ HTTP 200
   "comments": [],
   "comments_cnt": 0,
   "likes_cnt": 0,
-  "photo_caption": “This is photo of Golden Gate bridge”
+  "photo_caption": "This is photo of Golden Gate bridge"
 }
 
 HTTP 401
@@ -408,10 +412,10 @@ N/A
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
-"status”: “OK”
+"status": "OK"
 }
 
 HTTP 400 (Invalid Request - when content-type or something are improperly sent/not sent)
@@ -459,7 +463,7 @@ HTTP 200  (actual photo will be sent back)
 
 * Request Body
 
-```
+```javascript
 {
 "post_id": "5068ed9f00c0f50000000008",
 "text": "2nd Comment"
@@ -467,7 +471,8 @@ HTTP 200  (actual photo will be sent back)
 ```
 
 ####Response(s):
-```
+
+```javascript
 HTTP 200
 {
   "createdAt": "2012-10-01T01:24:43.992Z",
@@ -519,7 +524,7 @@ N/A
 
 * Response(s):
 
-```
+```javascript
 HTTP 200
 
 {
@@ -548,7 +553,7 @@ HTTP 200
 
 * Request Body
 
-```
+```javascript
 {
 "post_id": "5068ed9f00c0f50000000008",
 "text": " updated Comment"
@@ -557,7 +562,7 @@ HTTP 200
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
   "createdAt": "2012-10-01T01:24:43.992Z",
@@ -603,10 +608,10 @@ HTTP 401
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
-"status”: “OK”
+"status": "OK"
 }
 
 HTTP 400 (Invalid Request - when content-type or something are improperly sent/not sent)
@@ -637,7 +642,7 @@ HTTP 400 (Invalid Request)
 
 * Request Body
 
-```
+```javascript
 {
 "post_id": "5068ed9f00c0f50000000008"
 }
@@ -645,7 +650,7 @@ HTTP 400 (Invalid Request)
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
   "__v": 0,
@@ -698,7 +703,7 @@ HTTP 404
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
   "__v": 0,
@@ -734,10 +739,10 @@ HTTP 200
 
 ####Response(s):
 
-```
+```javascript
 HTTP 200
 {
-"status”: “OK”
+"status": "OK"
 }
 
 HTTP 400 (Invalid Request - when content-type or something are improperly sent/not sent)
@@ -775,10 +780,10 @@ HTTP 400 (Invalid Request)
   N/A
 
 #### Response(s):
-```
+```javascript
 HTTP 200
 {
-"status”: “OK”
+"status": "OK"
 }
 
 HTTP 400 (Invalid Request - when content-type or something are improperly sent/not sent)
@@ -812,7 +817,7 @@ HTTP 400 (Invalid Request)
 
 #### Response(s):
 
-```
+```javascript
 HTTP 200
 [
   {
@@ -912,7 +917,7 @@ HTTP 200
 
 * Response(s):
 
-```
+```javascript
 HTTP 200
 [
   {
